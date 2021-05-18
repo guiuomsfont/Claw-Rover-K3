@@ -64,23 +64,19 @@ The 3D parts that make up the structure of the robot have been designed so that 
 
   * Main chassis of the car: PLA plastic base on which we will build all the architecture of the Claw Rover 3K.
   
-  <p align="center"><img src="Design/Images/Different Visions.png" width="400"/></p>
+  <p align="center"><img src="Design/Images/Xassis.png" width="300"/></p>
   
   * Container (bin): A small container where the Claw Rover 3K will accumulate the rubbish it collects.
   
-  <p align="center"><img src="Design/Images/Different Visions.png" width="400"/></p>
-  
-  * Anthropomorphic arm base rotor: Mobile arm base, with the ability to rotate 360 ​​degrees (from -180º to 180º).
-  
-  <p align="center"><img src="Design/Images/Different Visions.png" width="400"/></p>
+  <p align="center"><img src="Design/Images/Bin.png" width="300"/></p>
   
   * Anthropomorphic arm joints (3): Articulated arm of the Claw Rover K3. It consists of 3 joints. When it detects debris, the Claw Rover 3K will approach it and calculate the appropriate arm position to pick it up. He will then move his arm to the appropriate position to leave the debris in the container.
   
-  <p align="center"><img src="Design/Images/Different Visions.png" width="400"/></p>
+  <p align="center"><img src="Design/Images/Arms.png" width="200"/></p>
   
   * Anthropomorphic arm claw: Articulated clamp located at the end of the arm, with which the Claw Rover 3K will catch the garbage.
 
-  <p align="center"><img src="Design/Images/Different Visions.png" width="400"/></p>
+  <p align="center"><img src="Design/Images/Claw.png" width="300"/></p>
   
 # Software Architecture
 
