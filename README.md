@@ -4,8 +4,9 @@
 Project of a programmed and simulated robot that drives autonomously and collects garbage.
 
    * [What is this?](#What-is-this)
+   * 
    * [Description](#Description)
-   <!-- [Amazing contributions](#Amazing-contributions)-->
+      <!-- [Amazing contributions](#Amazing-contributions)-->
    * [Hardware Scheme](#Hardware-Scheme)   
    * [3D pieces](#3D-pieces)
    * [Software Architecture](#Software-Architecture)
