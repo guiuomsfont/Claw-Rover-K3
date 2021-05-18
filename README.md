@@ -58,24 +58,19 @@ This is the Hardware Scheme we planned for this project, within the 100€ budge
 Here is the <a href="https://github.com/guiuomsfont/Claw-Rover-K3/blob/main/Design/Hardware%20Components.txt">list</a> of hardware components with purchase links.
 
 # 3D Pieces
-The 3D parts that make up the structure of the robot have been designed so that they can be printed and implemented in reality without any problems or collisions.
+The 3D parts that make up the structure of the robot have been designed so that they can be printed and implemented in reality without any problems or collisions with a 3D printer.
 
-<p align="center"><img src="Design/Images/Hardware Scheme.png" width="400"/></p>
-<!--
-In order to recreate the physical model of the robot, we had to design some of its parts as models to print with a 3D printer the university gave us access to. This are the models needed.  
+<p align="center"><img src="Design/Images/Different Visions.png" width="400"/></p>
 
-<img src="https://github.com/OriolMoreno/C.A.R.L.E.S/blob/master/imgs/cam.png" width="100" align="center"/>
-<img src="https://github.com/OriolMoreno/C.A.R.L.E.S/blob/master/imgs/xeringa.png" width="250" align="center"/>
-<img src="https://github.com/OriolMoreno/C.A.R.L.E.S/blob/master/imgs/girador.png" width="200" align="center"/>
-<img src="https://github.com/OriolMoreno/C.A.R.L.E.S/blob/master/imgs/deck.png" width="250" align="center"/>
-<img src="https://github.com/OriolMoreno/C.A.R.L.E.S/blob/master/imgs/pila.png" width="200" align="center"/>
-
-
-
-
-Files are avaliable under [stl](https://github.com/OriolMoreno/C.A.R.L.E.S/blob/master/stl/). Of course they could be replaced by any other model or created with other methods rather than 3D printing.
--->
-
+  * Main chassis of the car: PLA plastic base on which we will build all the architecture of the Claw Rover 3K.
+  <p align="center"><img src="Design/Images/Different Visions.png" width="400"/></p>
+  * Container (bin): A small container where the Claw Rover 3K will accumulate the rubbish it collects.
+  <p align="center"><img src="Design/Images/Different Visions.png" width="400"/></p>
+  * Anthropomorphic arm base rotor: Mobile arm base, with the ability to rotate 360 ​​degrees (from -180º to 180º).
+  <p align="center"><img src="Design/Images/Different Visions.png" width="400"/></p>
+  * Anthropomorphic arm joints (3): Articulated arm of the Claw Rover K3. It consists of 3 joints. When it detects debris, the Claw Rover 3K will approach it and calculate the appropriate arm position to pick it up. He will then move his arm to the appropriate position to leave the debris in the container.
+  <p align="center"><img src="Design/Images/Different Visions.png" width="400"/></p>
+  * Anthropomorphic arm clamp (Claw): Articulated clamp located at the end of the arm, with which the Claw Rover 3K will catch the garbage.
 
 # Software Architecture
 
