@@ -47,7 +47,7 @@ This is the Hardware Scheme we planned for this project, within the 100€ budge
 
 <p align="center"><img src="Design/Images/Hardware Scheme.png" width="400"/></p>
 
-<a href="https://github.com/guiuomsfont/Claw-Rover-K3/blob/main/Design/Hardware%20Components.txt">Here</a> is the list of hardware components with purchase links.
+Here is the <a href="https://github.com/guiuomsfont/Claw-Rover-K3/blob/main/Design/Hardware%20Components.txt">list</a> of hardware components with purchase links.
 
 
 # 3D Pieces
