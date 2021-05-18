@@ -4,9 +4,7 @@
 Project of a programmed and simulated robot that drives autonomously and collects garbage.
 
    * [What is this?](#What-is-this)
-   * 
-   * [Description](#Description)
-      <!-- [Amazing contributions](#Amazing-contributions)-->
+   * [Description](#Description)<!-- [Amazing contributions](#Amazing-contributions)-->
    * [Hardware Scheme](#Hardware-Scheme)   
    * [3D pieces](#3D-pieces)
    * [Software Architecture](#Software-Architecture)
@@ -43,11 +41,11 @@ _C.A.R.L.E.S_ is able to:<img src="https://github.com/OriolMoreno/C.A.R.L.E.S/bl
 - Calculate the angles of rotation of the arm motors in order to move the manipulator (including the one that controls the pressure of the suction cup) from one point to another, according to the positions of everything else on the board.
 - Unification of all the modules in a single workflow, which is what the physical robot would have had.
 
--->
+
 
 # Amazing contributions
 
-<!--
+
 The three most important contributions in which our robot stands up are:<img src="https://github.com/OriolMoreno/C.A.R.L.E.S/blob/master/imgs/braç.png" align="right" width="150" alt="header pic"/>
 - Entertainment for seniors:  it is designed to entertain the elderly, for whom robots are a whole new thing.
 - Classic Game Automation, the brisca: we give life to a classic and mythical game like the brisca combining it with technology and having it be even more enjoyable.
