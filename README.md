@@ -78,7 +78,7 @@ The 3D parts that make up the structure of the robot have been designed so that 
   
   <p align="center"><img src="Design/Images/Different Visions.png" width="400"/></p>
   
-  * Anthropomorphic arm clamp (Claw): Articulated clamp located at the end of the arm, with which the Claw Rover 3K will catch the garbage.
+  * Anthropomorphic arm claw: Articulated clamp located at the end of the arm, with which the Claw Rover 3K will catch the garbage.
 
   <p align="center"><img src="Design/Images/Different Visions.png" width="400"/></p>
   
