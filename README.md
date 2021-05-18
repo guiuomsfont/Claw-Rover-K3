@@ -3,7 +3,7 @@ Project of a programmed and simulated robot that drives autonomously and collect
 
 <p align="center"><img src="/Design/Images/Robot.png" width="300"/></p>
 
-   * [What is this?](#what-is-this)
+   * [What is this?](#What-is-this)
    * [Description](#Description)
    <!-- [Amazing contributions](#Amazing-contributions)-->
    * [Hardware Scheme](#Hardware-Scheme)   
@@ -56,7 +56,7 @@ The three most important contributions in which our robot stands up are:<img src
 # Hardware Scheme
 This is the Hardware Scheme we planned for this project, within the 100€ budget. 
 
-<p align="center"><img src="Design/Images/Hardware Scheme.png" width="300"/></p>
+<p align="center"><img src="Design/Images/Hardware-Scheme.png" width="300"/></p>
 
 Here is the list of hardware components with purchase links:
 https://github.com/guiuomsfont/Claw-Rover-K3/Design/Hardware_Components.txt
