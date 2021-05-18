@@ -16,8 +16,8 @@ def run_Claw_Rover_K3():
         p_gain = 0.07
         d_gain = 0.006
         i_gain = 0.000
-        #leftright = dr.DriveAdaptative(crk3, clientID, 20, p_gain, d_gain, i_gain)
-        leftright = dr.DriveReal(crk3, clientID, 20, p_gain, d_gain, i_gain)
+        leftright = dr.DriveAdaptative(crk3, clientID, 20, p_gain, d_gain, i_gain)
+        #leftright = dr.DriveReal(crk3, clientID, 20, p_gain, d_gain, i_gain)
         if leftright == 1:
             ha.handle_object(crk3, clientID, 1)
             ha.handle_object(crk3, clientID, 0)
