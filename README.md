@@ -58,8 +58,8 @@ This is the Hardware Scheme we planned for this project, within the 100€ budge
 
 <p align="center"><img src="Design/Images/Hardware-Scheme.png" width="300"/></p>
 
-Here is the list of hardware components with purchase links:
-https://github.com/guiuomsfont/Claw-Rover-K3/Design/Hardware_Components.txt
+Here is the list of hardware components with purchase <a href="https://github.com/guiuomsfont/Claw-Rover-K3/Design/Hardware Components.txt">links</a>.
+
 
 
 # 3D pieces
@@ -96,10 +96,9 @@ Initially all of them should have worked together, but after the project's objec
 
 ![2](https://github.com/OriolMoreno/C.A.R.L.E.S/blob/master/imgs/DiagramaModuls.png)
 
--->
 
 ## Modules
-<!--
+
 ### Brisca AI
 Requirements for the algorithm: python 3
 
