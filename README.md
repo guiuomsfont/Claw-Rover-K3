@@ -8,12 +8,12 @@ Project of a programmed and simulated robot that drives autonomously and collect
    * [Hardware Scheme](#Hardware-Scheme)   
    * [3D pieces](#3D-pieces)
    * [Software Architecture](#Software-Architecture)
-   * [Modules](#modules)
-      <!--* [Brisca AI](#Brisca-AI)
-      * [Card Detection with computer vision](#Card-Detection-with-computer-vision)
-      * [Inverse kinematics algorithm visualizer](#Inverse-kinematics-algorithm-visualizer)
-      * [Voice Recognition](#voice-recognition)
-      * [Videogame Simulation](#videogame-simulation)-->
+     * [Modules](#modules)
+        <!--* [Brisca AI](#Brisca-AI)
+        * [Card Detection with computer vision](#Card-Detection-with-computer-vision)
+        * [Inverse kinematics algorithm visualizer](#Inverse-kinematics-algorithm-visualizer)
+        * [Voice Recognition](#voice-recognition)
+        * [Videogame Simulation](#videogame-simulation)-->
    * [Video](#video)
    * [Authors](#authors)
 
@@ -47,10 +47,20 @@ This is the Hardware Scheme we planned for this project, within the 100€ budge
 
 <p align="center"><img src="Design/Images/Hardware Scheme.png" width="400"/></p>
 
+  * The Raspberry will be connected to the Arduino board that will help us to have control of the actuators and receivers.
+  * The camera will be connected to the Raspberry board so that it can analyze the environment and act accordingly.
+  * The Shield 293 driver will be connected to the Arduino and will help us to control the 4 servomotors and the ultrasonic sensor.
+  * The 4 servomotors will be connected to the Shield 293 controller to move the anthropomorphic arm.
+  * The 2 500 rpm engines will be connected to the L293 controller to move the wheels of the vehicle.
+  * The 12000 mAh Powerbank will connect to the Raspberry and Arduino boards to power them.
+  * The 4 AA batteries will be used to power our engines.
+
 Here is the <a href="https://github.com/guiuomsfont/Claw-Rover-K3/blob/main/Design/Hardware%20Components.txt">list</a> of hardware components with purchase links.
 
-
 # 3D Pieces
+The 3D parts that make up the structure of the robot have been designed so that they can be printed and implemented in reality without any problems or collisions.
+
+<p align="center"><img src="Design/Images/Hardware Scheme.png" width="400"/></p>
 <!--
 In order to recreate the physical model of the robot, we had to design some of its parts as models to print with a 3D printer the university gave us access to. This are the models needed.  
 
