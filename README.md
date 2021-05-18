@@ -146,4 +146,4 @@ Click the animated gif for the full version!
 
 - [JOSEP BRAVO BRAVO](https://github.com/LeBrav) - 1526453
 
-- [ARNAU JOSEP ALCÓN ACEDO](https://github.com/arnaujosepalcon) - 1529603
+- [ARNAU JOSEP ALCÓN ACEDO](https://github.com//1529603) - 1529603
