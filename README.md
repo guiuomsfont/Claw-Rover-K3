@@ -1,8 +1,8 @@
 # Claw-Rover-K3
+Project of a programmed and simulated robot that drives autonomously and collects garbage.
 <p align="center"><img src="/Design/Images/Robot.png" width="300"/></p>
 
-Project of a programmed and simulated robot that drives autonomously and collects garbage.
-
+# Table of Contents
    * [What is this?](#What-is-this)
    * [Description](#Description)<!-- [Amazing contributions](#Amazing-contributions)-->
    * [Hardware Scheme](#Hardware-Scheme)   
@@ -14,35 +14,25 @@ Project of a programmed and simulated robot that drives autonomously and collect
       * [Inverse kinematics algorithm visualizer](#Inverse-kinematics-algorithm-visualizer)
       * [Voice Recognition](#voice-recognition)
       * [Videogame Simulation](#videogame-simulation)-->
-
    * [Video](#video)
    * [Authors](#authors)
 
 
 
 # What is this?
+We are a group of four Computer Engineering students. More specifically, we specialize in the branch of Computation. 
+This project integrates knowledge that we have acquired throughout the degree, mixing disciplines such as Robotics, Computer Vision, Deep Learning, Artificial Intelligence, Mathematics...
+The result of this work is in this repository, in the form of a self-driving robot which follows the road, while detecting any trash along the way. It collects all the trash it detects, effectively acting as an autonomous garbage truck.
 
-<!-- We are 3rd year Computer Science students and this is a robotics project for our subject on Robòtica, Llenguatge i Planificació - Robotics Language and Planning.
-
-
-We have focused deeply on polishing the software part of the project, but due to the circumstances (this project was interrupted by the 2020 Coronavirus outbreak), we haven't been able to implement it on hardware. Instead, we have prepared a full-on videogame to act as a simulation for what this project can become. And it is prepared for anyone to take it and move our sofware modules to a phisical robot.
-
-This is where you come in! -->
-
+The Claw Rover K3 (CRK3) project is based on two very clear motivations. First, we wanted to create a robot committed to the environment, capable of making the world a slightly cleaner planet. Secondly, we were very fascinated by autonomous driving systems, such as those of Tesla, and we wanted to take advantage of this project to study them in depth, to implement one satisfactorily and to be able to play and experiment with it.
+From the union of these two great motivations, and from the ideas and the effort of the four members of the group, Claw Rover K3 was born 
 
 # Description
-In this project you will find the code, simulations and 3D designs of the parts of a robot developed from scratch, which is able to drive autonomously and collect garbage previously detected using computer vision techniques. This robot consists, schematically, of an anthropomorphic arm located on a platform with four wheels (front-wheel drive). It is implemented with Coppelia simulator and, in case you want to carry it out in real life, the instructions dedicated to the movement of the simulation robot should be substituted by communication instructions from a Raspberry Pi board to an Arduino board. This is a necessary step in order to correctly interact with the hardware components of the robot, such as the wheels, the arm or the sensors.
+In this project you will find the code, simulations and 3D designs of the parts of a robot developed from scratch, Claw-Rover-K3, which is able to drive autonomously and collect garbage previously detected using computer vision techniques. This robot consists, schematically, of an anthropomorphic arm located on a platform with four wheels (front-wheel drive). It is implemented with Coppelia simulator and, in case you want to carry it out in real life, the instructions dedicated to the movement of the simulation robot should be substituted by communication instructions from a Raspberry Pi board to an Arduino board. This is a necessary step in order to correctly interact with the hardware components of the robot, such as the wheels, the arm or the sensors.
+
+Basically, the robot is able to, through a camera sensor, detect the road and adjust its speed, direction and position based on a PID controller. In addition, through the use of a neural network, you have the option of enabling traffic sign recognition, which is used to influence the robot's driving and influence its trajectory. While it is self-driving, it analyses each of the processed frames in order to find garbage and collect it. When it detects trash, the robot reduces its speed, stops to a halt, and using the same camera that is used to drive, it detects the exact position of the object, using inverse kinematics equations. Afterwards, it will use its claw to pick up the object and deposit it in the trash container.
 
 <!--
-_C.A.R.L.E.S_ is able to:<img src="https://github.com/OriolMoreno/C.A.R.L.E.S/blob/master/imgs/cartas.png" align="right" width="300" alt="header pic"/>
-- Recognize cards with the computer vision module (number and suit of the card).
-- Play a brisca game with an AI algorithm that will do its best to outsmart the opponent.
-- Control the actions to be performed (start and end game, steal a card, knowing it's C.A.R.L.E.S.' turn, etc.) by voice commands that the human will say during the game.
-- Calculate the angles of rotation of the arm motors in order to move the manipulator (including the one that controls the pressure of the suction cup) from one point to another, according to the positions of everything else on the board.
-- Unification of all the modules in a single workflow, which is what the physical robot would have had.
-
-
-
 # Amazing contributions
 
 
@@ -57,8 +47,7 @@ This is the Hardware Scheme we planned for this project, within the 100€ budge
 
 <p align="center"><img src="Design/Images/Hardware Scheme.png" width="400"/></p>
 
-Here is the list of hardware components with purchase <a href="https://github.com/guiuomsfont/Claw-Rover-K3/blob/main/Design/Hardware%20Components.txt">links</a>.
-
+<a href="https://github.com/guiuomsfont/Claw-Rover-K3/blob/main/Design/Hardware%20Components.txt">Here</a> is the list of hardware components with purchase links.
 
 
 # 3D Pieces
