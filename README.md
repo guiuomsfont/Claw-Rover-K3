@@ -61,7 +61,7 @@ Here is the list of hardware components with purchase <a href="https://github.co
 
 
 
-# 3D pieces
+# 3D Pieces
 <!--
 In order to recreate the physical model of the robot, we had to design some of its parts as models to print with a 3D printer the university gave us access to. This are the models needed.  
 
