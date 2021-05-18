@@ -1,7 +1,7 @@
 # Claw-Rover-K3
-Project of a programmed and simulated robot that drives autonomously and collects garbage.
-
 <p align="center"><img src="/Design/Images/Robot.png" width="300"/></p>
+
+Project of a programmed and simulated robot that drives autonomously and collects garbage.
 
    * [What is this?](#What-is-this)
    * [Description](#Description)
