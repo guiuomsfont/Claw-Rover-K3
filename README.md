@@ -130,9 +130,7 @@ Requirements: Python 3 and its libraries google-cloud-speech, google-auth-oauthl
 -->
 
 # Video
-Video showing all the functionalities of the project.
-
-[(https://www.youtube.com/watch?v=PG_kRP0kjCk&ab_channel=PepBravo)]
+Video showing all the functionalities of the project in this <a href="https://www.youtube.com/watch?v=PG_kRP0kjCk&ab_channel=PepBravo">link</a>.
 
 # Authors
 
