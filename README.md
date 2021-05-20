@@ -94,7 +94,7 @@ In order to have an optimal code structure, we have divided all the algorithms a
             4. Using the 2 peaks obtained through the histogram, we use a sliding window algorithm which saves all the pixels it detects at each of the lines. After that is done, we now have all the pixels at the edge of the roads. We can now use the two lists to fit polynomial functions to the curves of the lane. 
             5. And we are done. We can now revert the perspective transformation we applied earlier and we have our lane curves! 
        The result is very satisfactory, as you can see below:
-       <p align="center"><img src="Code/Images/Lane_detection.png" width="200"/></p>
+       <p align="center"><img src="Code/Images/Lane_detection.png" width="400"/></p>
        After computing the lane edges, we can now use the two lines to compute the center of the lane, which will be used as our "ideal" position. When we have the ideal position, we can compute the offset between the robot and that position, which is the offset which will be used when computing the steering angle with the PID controller.
       
       3. **Sign traffic**: 
