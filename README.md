@@ -5,16 +5,13 @@ Project of a programmed and simulated robot that drives autonomously and collect
 # Table of Contents
    * [What is this?](#What-is-this)
    * [Description](#Description)<!-- [Amazing contributions](#Amazing-contributions)-->
+   * [Video](#video)
    * [Hardware Scheme](#Hardware-Scheme)   
    * [3D pieces](#3D-pieces)
    * [Software Architecture](#Software-Architecture)
-     * [Modules](#modules)
-        <!--* [Brisca AI](#Brisca-AI)
-        * [Card Detection with computer vision](#Card-Detection-with-computer-vision)
-        * [Inverse kinematics algorithm visualizer](#Inverse-kinematics-algorithm-visualizer)
-        * [Voice Recognition](#voice-recognition)
-        * [Videogame Simulation](#videogame-simulation)-->
-   * [Video](#video)
+     * [Computer Vision Module](#Computer-Vision-Module)
+     * [Driving Module](#Driving-Module)
+     * [Handling Module](#Handling-Module)
    * [Authors](#authors)
 
 
