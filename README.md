@@ -131,6 +131,7 @@ Requirements: Python 3 and its libraries google-cloud-speech, google-auth-oauthl
 
 # Video
 Video showing all the functionalities of the project in this <a href="https://www.youtube.com/watch?v=PG_kRP0kjCk&ab_channel=PepBravo">link</a>.
+<iframe width="1280" height="720" src="https://www.youtube.com/embed/PG_kRP0kjCk" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 # Authors
 
