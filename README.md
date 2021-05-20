@@ -49,7 +49,7 @@ This is the Hardware Scheme we planned for this project, within the 100€ budge
 
 <p align="center"><img src="Design/Images/Hardware Scheme.png" width="400"/></p>
 
-  * The Raspberry will be connected to the Arduino board that will help us to have control of the actuators and receivers.
+  * The Raspberry will be connected to the Arduino board which will allow us to have control of the actuators and receivers.
   * The camera will be connected to the Raspberry board so that it can analyze the environment and act accordingly.
   * The Shield 293 driver will be connected to the Arduino and will help us to control the 4 servomotors and the ultrasonic sensor.
   * The 4 servomotors will be connected to the Shield 293 controller to move the anthropomorphic arm.
