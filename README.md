@@ -112,7 +112,7 @@ Before classifying the traffic signs though, we needed to train the neural netwo
 3. **Trash recognition**: When we ran the simulation with both the lane detection algorithm and the sign traffic classifier, we realized that the performance of the simulator was going to be a problem. Our computers were running the simulation at no more than 20 frames per second. After realizing this, we decided that the most important feature of the trash recognition algorithm would be its compute efficiency. It was of paramount importance that the algorithm was able to run very fast, or otherwise we would be risking an erratic driving model. \
 With that being said, our trash detector uses a very fast blob detector algorithm which detects objects of a certain size at each side of the road. This works very well with our simulation, and it's also a very efficient algorithm to run, which means that the impact to the performance of the simulation is very small. 
       
-## **Driving module**: 
+## **Driving Module**: 
 The driving module receives information from the Computer Vision module and it computes the trajectory, speed and other such parameters in order to update the trajectory and speed of the robot. The goal of this module is to provide safe and smooth driving which also follows the law by reading traffic signs and acting accordingly. \
 
 First and foremost, the Driving module uses the offset (Proportional), as well as the previous offset (Derivate) and the sum of offsets (Integral) parameters to compute the steering angle using the very reliable PID controller. After tuning the parameters of this controller by trial and error, we settled on very reliable and satisfactory parameters which ensure that the robot stays within the road and it drives in a smoothly manner. \
@@ -125,9 +125,14 @@ Before that though, we decided to implement two driving modes, the Adaptive Driv
 
 2. **Real Driving Mode**: On the other hand, we implemented the Real Driving Mode which computes its speed based on the speed limiter traffic signs it detects. What this means is that this mode is always following the speed that the authorities have declared as fit for that section of the road. In the simulator, this driving mode acts according to the traffic signs we placed around the track, which means that it stops when it reads a STOP sign, and it adopts the speeds that the traffic signs indicate at all times. 
           
-## **Handling module**: 
+## **Handling Module**
 When the Handling mode is activated, the robot is already standing next to the piece of trash it has to collect. Therefore, the servos at the wheels are turned off during this mode.\
-First of all, the arm of the robot adopts a position which allows the camera to see the object from above. After that, the camera detects the coordinates 
+First of all, the arm of the robot adopts a position which allows the camera to see the object from above. After that, the camera detects the coordinates of the piece of trash. \
+Then, through the use of inverse kinematics equations, the robot computes the angle that each servo needs to adopt in order to reach the object. Once that's done, the claw will close, and the arm will lift, picking the object.\
+
+Finally, the object will be deposited in the trash container, which is used to store all the trash that Claw Rover K3 collects.\
+
+After all that is done, the robot will once again go back to the Driving Mode and so on.
 
 <!--
 In order to develop the idea we had, we must divide the software architecture in different modules. First to make them work separately and then be able to put them all together as one whole project. The modules are:
