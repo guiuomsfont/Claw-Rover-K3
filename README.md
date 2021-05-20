@@ -86,9 +86,10 @@ Our robot is always running in one of two modes, the Driving Mode and the Handli
 In order to have an optimal code structure, we have divided all the algorithms and procedures into 3 main modules: the Computer Vision module, the Driving module and the Handling module. The first two modules are used to run the robot in Driving Mode, and the Handling module is the one that is used in the Handling Mode. Now, let's run through all the modules:
 
   * **Computer Vision module**: This module contains all the algorithms and functions used to process the images being obtained through the camera sensor and obtain useful information required for the self-driving. These functionalities are the following:
-      1. **Lane detection**: In order to drive, the robot must know where it's located within the road lane it's driving through. For that to be possible, we knew from the get-go that a robust lane detection algorithm was necessary for this project. When we initially did some reasearch, we found some really simple Hough Line lane detectors which are very fast and work really well in straight roads or roads with very gentle curves. When we tried our hand at coding one of those algorithms, we found that it was great for detecting the straight lines at each side of the road, so we tried to plug that algorithm into the simulator. The results were not what we expected, and the algorithm was having enormous trouble at detecting the road properly in our set piece. After doing some digging, 
-      2. **Sign traffic**: 
-      3. **Trash recognition**: 
+      1. **Lane detection**: In order to drive, the robot must know where it's located within the road lane it's driving through. For that to be possible, we knew from the get-  go that a robust lane detection algorithm was necessary for this project. When we initially did some reasearch, we found some really simple Hough Line lane detectors which are very fast and work really well in straight roads or roads with very gentle curves. When we tried our hand at coding one of those algorithms, we found that it was great for detecting the straight lines at each side of the road, so we tried to plug that algorithm into the simulator. The results were not what we expected, and the algorithm was having enormous trouble at detecting the road properly in our set piece. After doing some digging, we realized this happened because the Hough Line algorithm we were using was only capable of fitting straight lines. 
+      After seeing these results, we scrapped our first algorithm and we searched for alternatives. 
+      3. **Sign traffic**: 
+      4. **Trash recognition**: 
   * **Driving module**: 
   * **Handling module**: 
 
