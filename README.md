@@ -103,7 +103,7 @@ After seeing these results, we scrapped our first algorithm and looked for alter
 The result is very satisfactory, as you can see below:
 <p align="center"><img src="Code/Images/Lane_detection.png" width="400"/></p>
 
-After computing the lane edges, we can now use the two lines to compute the center of the lane, which will be used as our "ideal" position. When we have the ideal position, we can compute the offset between the robot and that position, which is the offset which will be used when computing the steering angle with the PID controller.
+  After computing the lane edges, we can now use the two lines to compute the center of the lane, which will be used as our "ideal" position. When we have the ideal position, we can compute the offset between the robot and that position, which is the offset which will be used when computing the steering angle with the PID controller.
 
 
        
