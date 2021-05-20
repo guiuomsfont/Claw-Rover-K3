@@ -30,7 +30,7 @@ In this project you will find the code, simulations and 3D designs of the parts 
 Basically, the robot is able to, through a camera sensor, detect the road and adjust its speed, direction and position based on a PID controller. In addition, through the use of a neural network, you have the option of enabling traffic sign recognition, which is used to influence the robot's driving and influence its trajectory. While it is self-driving, it analyses each of the processed frames in order to find garbage and collect it. When it detects trash, the robot reduces its speed, stops to a halt, and using the same camera that is used to drive, it detects the exact position of the object, using inverse kinematics equations. Afterwards, it will use its claw to pick up the object and deposit it in the trash container.
 
 # Video
-Video showing all the functionalities of the project in this <a href="https://youtu.be/jCSkAflEXYQ">link</a> or clicking on the GIF.
+Video showing all the functionalities of the project in this <a href="https://youtu.be/jCSkAflEXYQ">link</a> or clicking on the GIF below.
 
 <a href="https://youtu.be/jCSkAflEXYQ">![2](https://github.com/guiuomsfont/Claw-Rover-K3/blob/main/Design/Images/Presentation_GIF.gif)</a>
 
