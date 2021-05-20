@@ -25,7 +25,7 @@ This project integrates knowledge that we have acquired throughout the degree, m
 The result of this work is in this repository, in the form of a self-driving robot which follows the road, while detecting any trash along the way. It collects all the trash it detects, effectively acting as an autonomous garbage truck.
 
 The Claw Rover K3 (CRK3) project is based on two very clear motivations. First, we wanted to create a robot committed to the environment, capable of making the world a slightly cleaner planet. Secondly, we were very fascinated by autonomous driving systems, such as those of Tesla, and we wanted to take advantage of this project to study them in depth, to implement one satisfactorily and to be able to play and experiment with it.
-From the union of these two great motivations, and from the ideas and the effort of the four members of the group, Claw Rover K3 was born 
+From the union of these two great motivations, and from the ideas and the effort of the four members of the group, Claw Rover K3 was born.
 
 # Description
 In this project you will find the code, simulations and 3D designs of the parts of a robot developed from scratch, Claw-Rover-K3, which is able to drive autonomously and collect garbage previously detected using computer vision techniques. This robot consists, schematically, of an anthropomorphic arm located on a platform with four wheels (front-wheel drive). It is implemented with Coppelia simulator and, in case you want to carry it out in real life, the instructions dedicated to the movement of the simulation robot should be substituted by communication instructions from a Raspberry Pi board to an Arduino board. This is a necessary step in order to correctly interact with the hardware components of the robot, such as the wheels, the arm or the sensors.
@@ -85,8 +85,14 @@ Our robot is always running in one of two modes, the Driving Mode and the Handli
 
 In order to have an optimal code structure, we have divided all the algorithms and procedures into 3 main modules: the Computer Vision module, the Driving module and the Handling module. The first two modules are used to run the robot in Driving Mode, and the Handling module is the one that is used in the Handling Mode. Now, let's run through all the modules:
 
-
-
+  * **Computer Vision module**: This module contains all the algorithms and functions used to process the images being obtained through the camera sensor and obtain useful information required for the self-driving. These functionalities are the following:
+  <ol type="a">
+    <li>Coffee</li>
+    <li>Tea</li>
+    <li>Milk</li>
+  </ol>
+  * **Driving module**: 
+  * **Handling module**: 
 
 <!--
 In order to develop the idea we had, we must divide the software architecture in different modules. First to make them work separately and then be able to put them all together as one whole project. The modules are:
