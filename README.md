@@ -115,7 +115,7 @@ You can see the result of the classifier in the figures below:
 3. **Trash recognition**: When we ran the simulation with both the lane detection algorithm and the sign traffic classifier, we realized that the performance of the simulator was going to be a problem. Our computers were running the simulation at no more than 20 frames per second. After realizing this, we decided that the most important feature of the trash recognition algorithm would be its compute efficiency. It was of paramount importance that the algorithm was able to run very fast, or otherwise we would be risking an erratic driving model. \
 That being said, our trash detector uses a very fast blob detector algorithm which detects objects of a certain size at each side of the road. This works very well with our simulation, and it's also a very efficient algorithm to run, which means that the impact to the performance of the simulation is very small. 
       
-## **Driving Module**: 
+## **Driving Module**
 The Driving Module receives information from the Computer Vision Module and it computes the trajectory, speed and other such parameters in order to update the trajectory and speed of the robot. The goal of this module is to provide safe and smooth driving which also follows the law by reading traffic signs and acting accordingly. 
 
 First and foremost, the Driving module uses the offset (Proportional), as well as the offset of the previous frame (Derivate), and the sum of offsets (Integral) parameters to compute the steering angle using a reliable PID controller. After tuning the parameters of this controller by trial and error, we settled on consistent and satisfactory parameters which ensure that the robot stays within the road and it drives in a smoothly manner. 
