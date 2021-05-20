@@ -79,6 +79,10 @@ The 3D parts that make up the structure of the robot have been designed so that 
   <p align="center"><img src="Design/Images/Claw.png" width="200"/></p>
   
 # Software Architecture
+Our software modules have all been programmed using the Python coding language. Conveniently, Python can easily be run on a Raspberry Pi 3, which is is the board we are using in our robot. For testing purposes, we are using Coppelia Simulator, which can be interacted with through the Simulator library for Python. As we've already explained above, in order to run the robot in real life, the simulator methods should be substituted by the corresponding Serial calls to the Arduino board, which would then send the corresponding signals to the servos, as well as retrieve the frame signals from the camera sensor. 
+
+Our robot is always running in one of two modes, the Driving Mode and the Handling Mode. As the name implies, the Driving Mode handles everything related to the self-driving feature of the car, including all the Computer Vision algorithms (lane detection, traffic sign recognition and trash detection), as well as the PID controller and the equations used to obtain the left and right servo speeds (Unicycle Model). On the other hand, the Handling mode contains all the procedures related to the trash collectionm including the computation of the trash coordinates, the inverse kinematics equations which are used to compute the angles for all the joints and the commands to used to pick up the object and place it inside the trash container. 
+
 
 <!--
 In order to develop the idea we had, we must divide the software architecture in different modules. First to make them work separately and then be able to put them all together as one whole project. The modules are:
