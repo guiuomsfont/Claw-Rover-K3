@@ -108,7 +108,10 @@ After computing the lane edges, we can now use the two lines to compute the cent
 The model is also robust in the sense that it does not take outliers into account. What this means is that if it reads eight 80 KPH speed limiter signs in a row, and one 30 KPH speed limiter sign in the middle of that sequence, it will discard the outlier, and it will output the 80 KPH speed limiter class. \
 This algorithm contains an initial cropping algorithm which uses the color of the expected traffic signs to crop the frame so that all the information which does not belong to a traffic sign is discarded. \
 Before classifying the traffic signs though, we needed to train the neural network. In order to do so, we manually ran the simulator multiple times and saved the frames that the robot was capturing to build a dataset.\
-After that, we manually labelled all the images with the correct class of traffic sign that each one contained. With this dataset we were able to train the neural network, which was now ready to be used in our driving model.
+After that, we manually labelled all the images with the correct class of traffic sign that each one contained. With this dataset we were able to train the neural network, which was now ready to be used in our driving model.\
+You can see the result of the classifier in the figures below:
+<p align="center"><img src="Code/Images/80kph.png" width="400"/></p>
+<p align="center"><img src="Code/Images/stop.png" width="400"/></p>
 
 3. **Trash recognition**: When we ran the simulation with both the lane detection algorithm and the sign traffic classifier, we realized that the performance of the simulator was going to be a problem. Our computers were running the simulation at no more than 20 frames per second. After realizing this, we decided that the most important feature of the trash recognition algorithm would be its compute efficiency. It was of paramount importance that the algorithm was able to run very fast, or otherwise we would be risking an erratic driving model. \
 That being said, our trash detector uses a very fast blob detector algorithm which detects objects of a certain size at each side of the road. This works very well with our simulation, and it's also a very efficient algorithm to run, which means that the impact to the performance of the simulation is very small. 
