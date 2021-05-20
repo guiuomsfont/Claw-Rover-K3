@@ -130,14 +130,9 @@ Requirements: Python 3 and its libraries google-cloud-speech, google-auth-oauthl
 -->
 
 # Video
-<!--
-Short video showing all the functionalities of the project.
+Video showing all the functionalities of the project in this <a href="https://www.youtube.com/watch?v=PG_kRP0kjCk&ab_channel=PepBravo">link</a>.
 
-[![2](https://github.com/OriolMoreno/C.A.R.L.E.S/blob/master/gif/funcionalities.gif)](https://www.youtube.com/watch?v=alATNutyEoA&feature=youtu.be)
 
-Click the animated gif for the full version!
-
--->
 # Authors
 
 - [GUIU OMS FONT](https://github.com/guiuomsfont) - 1525686
