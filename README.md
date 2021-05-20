@@ -83,6 +83,10 @@ Our software modules have all been programmed using the Python coding language. 
 
 Our robot is always running in one of two modes, the Driving Mode and the Handling Mode. As the name implies, the Driving Mode handles everything related to the self-driving feature of the car, including all the Computer Vision algorithms (lane detection, traffic sign recognition and trash detection), as well as the PID controller and the equations used to obtain the left and right servo speeds (Unicycle Model). On the other hand, the Handling mode contains all the procedures related to the trash collectionm including the computation of the trash coordinates, the inverse kinematics equations which are used to compute the angles for all the joints and the commands to used to pick up the object and place it inside the trash container. 
 
+In order to have an optimal code structure, we have divided all the algorithms and procedures into 3 main modules: the Computer Vision module, the Driving module and the Handling module. The first two modules are used to run the robot in Driving Mode, and the Handling module is the one that is used in the Handling Mode. Now, let's run through all the modules:
+
+
+
 
 <!--
 In order to develop the idea we had, we must divide the software architecture in different modules. First to make them work separately and then be able to put them all together as one whole project. The modules are:
