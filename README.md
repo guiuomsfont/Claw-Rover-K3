@@ -97,8 +97,8 @@ In order to have an optimal code structure, we have divided all the algorithms a
        <p align="center"><img src="Code/Images/Lane_detection.png" width="400"/></p>
        After computing the lane edges, we can now use the two lines to compute the center of the lane, which will be used as our "ideal" position. When we have the ideal position, we can compute the offset between the robot and that position, which is the offset which will be used when computing the steering angle with the PID controller.
       
-      3. **Sign traffic**: 
-      4. **Trash recognition**: 
+      2. **Sign traffic**: 
+      3. **Trash recognition**: 
   * **Driving module**: 
   * **Handling module**: 
 
