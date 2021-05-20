@@ -132,7 +132,7 @@ Requirements: Python 3 and its libraries google-cloud-speech, google-auth-oauthl
 # Video
 Video showing all the functionalities of the project in this <a href="https://www.youtube.com/watch?v=PG_kRP0kjCk&ab_channel=PepBravo">link</a>.
 
-<a align="center" href="https://www.youtube.com/watch?v=PG_kRP0kjCk&ab_channel=PepBravo">![2](https://github.com/guiuomsfont/Claw-Rover-K3/blob/main/Design/Images/Presentation_GIF.gif)</a>
+<p align="center"><a href="https://www.youtube.com/watch?v=PG_kRP0kjCk&ab_channel=PepBravo">![2](https://github.com/guiuomsfont/Claw-Rover-K3/blob/main/Design/Images/Presentation_GIF.gif)</a></p>
 
 
 # Authors
