@@ -102,7 +102,10 @@ After seeing these results, we scrapped our first algorithm and looked for alter
 5. And we are done. We can now revert the perspective transformation we applied earlier, and we have our lane curves! 
 The result is very satisfactory, as you can see below:
 <p align="center"><img src="Code/Images/Lane_detection.png" width="400"/></p>
+
 After computing the lane edges, we can now use the two lines to compute the center of the lane, which will be used as our "ideal" position. When we have the ideal position, we can compute the offset between the robot and that position, which is the offset which will be used when computing the steering angle with the PID controller.
+
+
        
 2. **Traffic sign recognition**: We also worked on a traffic sign detector, which we use to ensure that the robot follows the rules of circulation in the form of traffic signs. The algorithm is capable of cropping traffic signs out of the image, analyzing that data and identifying which traffic sign class they belong to. In order to achieve this purpose, we built a neural network classifier which has been trained thoroughly to ensure good accuracy when classifying traffic signs. \
 The model is also robust in the sense that it does not take outliers into account. What this means is that if it reads eight 80 KPH speed limiter signs in a row, and one 30 KPH speed limiter sign in the middle of that sequence, it will discard the outlier, and it will output the 80 KPH speed limiter class. \
