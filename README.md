@@ -25,7 +25,7 @@ This project integrates knowledge that we have acquired throughout the degree, m
 The result of this work is in this repository, in the form of a self-driving robot which follows the road, while detecting any trash along the way. It collects all the trash it detects, effectively acting as an autonomous garbage truck.
 
 The Claw Rover K3 (CRK3) project is based on two very clear motivations. First, we wanted to create a robot committed to the environment, capable of making the world a slightly cleaner planet. Secondly, we were very fascinated by autonomous driving systems, such as those of Tesla, and we wanted to take advantage of this project to study them in depth, to implement one satisfactorily and to be able to play and experiment with it.
-From the union of these two great motivations, and from the ideas and the effort of the four members of the group, Claw Rover K3 was born 
+From the union of these two great motivations, and from the ideas and the effort of the four members of the group, Claw Rover K3 was born.
 
 # Description
 In this project you will find the code, simulations and 3D designs of the parts of a robot developed from scratch, Claw-Rover-K3, which is able to drive autonomously and collect garbage previously detected using computer vision techniques. This robot consists, schematically, of an anthropomorphic arm located on a platform with four wheels (front-wheel drive). It is implemented with Coppelia simulator and, in case you want to carry it out in real life, the instructions dedicated to the movement of the simulation robot should be substituted by communication instructions from a Raspberry Pi board to an Arduino board. This is a necessary step in order to correctly interact with the hardware components of the robot, such as the wheels, the arm or the sensors.
@@ -79,6 +79,28 @@ The 3D parts that make up the structure of the robot have been designed so that 
   <p align="center"><img src="Design/Images/Claw.png" width="200"/></p>
   
 # Software Architecture
+Our software modules have all been programmed using the Python coding language. Conveniently, Python can easily be run on a Raspberry Pi 3, which is is the board we are using in our robot. For testing purposes, we are using Coppelia Simulator, which can be interacted with through the Simulator library for Python. As we've already explained above, in order to run the robot in real life, the simulator methods should be substituted by the corresponding Serial calls to the Arduino board, which would then send the corresponding signals to the servos, as well as retrieve the frame signals from the camera sensor. 
+
+Our robot is always running in one of two modes, the Driving Mode and the Handling Mode. As the name implies, the Driving Mode handles everything related to the self-driving feature of the car, including all the Computer Vision algorithms (lane detection, traffic sign recognition and trash detection), as well as the PID controller and the equations used to obtain the left and right servo speeds (Unicycle Model). On the other hand, the Handling mode contains all the procedures related to the trash collectionm including the computation of the trash coordinates, the inverse kinematics equations which are used to compute the angles for all the joints and the commands to used to pick up the object and place it inside the trash container. 
+
+In order to have an optimal code structure, we have divided all the algorithms and procedures into 3 main modules: the Computer Vision module, the Driving module and the Handling module. The first two modules are used to run the robot in Driving Mode, and the Handling module is the one that is used in the Handling Mode. Now, let's run through all the modules:
+
+  * **Computer Vision module**: This module contains all the algorithms and functions used to process the images being obtained through the camera sensor and obtain useful information required for the self-driving. These functionalities are the following:
+      1. **Lane detection**: In order to drive, the robot must know where it's located within the road lane it's driving through. For that to be possible, we knew from the get-go that a robust lane detection algorithm was necessary for this project. When we initially did some research, we found some really simple Hough Line lane detectors which are very fast and work really well in straight roads or roads with very gentle curves. When we tried our hand at coding one of those algorithms, we found that it was great for detecting the straight lines at each side of the road, so we tried to plug that algorithm into the simulator. The results were not what we expected, and the algorithm was having enormous trouble at detecting the road properly in our set piece. After doing some digging, we realized this happened because the Hough Line algorithm we were using was only capable of fitting straight lines. 
+      After seeing these results, we scrapped our first algorithm and looked for alternatives. Thankfully, we were able to find really robust curved lane detector techniques           and we started to follow multiple guides on how to program such algorithms. We finally settled on a combination of multiple simple but effective techniques. The                 procedure is as follows:
+            1. We process the image in the HSL color space. More precisely, we threshold the lightness channel and the saturation channel using Sobel, which detects horizontal changes in lightness and saturation, respectively. After that, we combined the two binary images to obtain a combined binary image which (hopefully) shows two clear lines. 
+            2. Once we have the combined binary, we use an Homography transformation to get a bird's eye perspective of the road, which is very helpful when detecting lanes.
+            3. We then compute a horizontal histogram of the bird's eye binary image, which clearly shows 2 peaks of color which correspond with the position of the lane edges.
+            4. Using the 2 peaks obtained through the histogram, we use a sliding window algorithm which saves all the pixels it detects at each of the lines. After that is done, we now have all the pixels at the edge of the roads. We can now use the two lists to fit polynomial functions to the curves of the lane. 
+            5. And we are done. We can now revert the perspective transformation we applied earlier and we have our lane curves! 
+       The result is very satisfactory, as you can see below:
+       <p align="center"><img src="Code/Images/Lane_detection.jpg" width="200"/></p>
+       After computing the lane edges, we can now use the two lines to compute the center of the lane, which will be used as our "ideal" position. When we have the ideal position, we can compute the offset between the robot and that position, which is the offset which will be used when computing the steering angle with the PID controller.
+      
+      3. **Sign traffic**: 
+      4. **Trash recognition**: 
+  * **Driving module**: 
+  * **Handling module**: 
 
 <!--
 In order to develop the idea we had, we must divide the software architecture in different modules. First to make them work separately and then be able to put them all together as one whole project. The modules are:
@@ -130,14 +152,11 @@ Requirements: Python 3 and its libraries google-cloud-speech, google-auth-oauthl
 -->
 
 # Video
-<!--
-Short video showing all the functionalities of the project.
+Video showing all the functionalities of the project in this <a href="https://youtu.be/jCSkAflEXYQ">link</a> or clicking on the image.
 
-[![2](https://github.com/OriolMoreno/C.A.R.L.E.S/blob/master/gif/funcionalities.gif)](https://www.youtube.com/watch?v=alATNutyEoA&feature=youtu.be)
+<a href="https://youtu.be/jCSkAflEXYQ">![2](https://github.com/guiuomsfont/Claw-Rover-K3/blob/main/Design/Images/Presentation_GIF.gif)</a>
 
-Click the animated gif for the full version!
 
--->
 # Authors
 
 - [GUIU OMS FONT](https://github.com/guiuomsfont) - 1525686
