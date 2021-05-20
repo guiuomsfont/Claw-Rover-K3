@@ -86,11 +86,11 @@ Our robot is always running in one of two modes, the Driving Mode and the Handli
 In order to have an optimal code structure, we have divided all the algorithms and procedures into 3 main modules: the Computer Vision module, the Driving module and the Handling module. The first two modules are used to run the robot in Driving Mode, and the Handling module is the one that is used in the Handling Mode. Now, let's run through all the modules:
 
   * **Computer Vision module**: This module contains all the algorithms and functions used to process the images being obtained through the camera sensor and obtain useful information required for the self-driving. These functionalities are the following:
-  <ol type="a">
-    <li>Coffee</li>
-    <li>Tea</li>
-    <li>Milk</li>
-  </ol>
+      <ol type="a">
+        <li>Coffee</li>
+        <li>Tea</li>
+        <li>Milk</li>
+      </ol>
   * **Driving module**: 
   * **Handling module**: 
 
