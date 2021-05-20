@@ -68,7 +68,7 @@ The 3D parts that make up the structure of the robot have been designed so that 
   
   <p align="center"><img src="Design/Images/Xassis.png" width="200"/></p>
   
-  * Container (bin): A small container where the Claw Rover 3K will accumulate the rubbish it collects.
+  * Container (bin): A small container where the Claw Rover 3K will store the trash it collects.
   
   <p align="center"><img src="Design/Images/Bin.png" width="200"/></p>
   
@@ -76,7 +76,7 @@ The 3D parts that make up the structure of the robot have been designed so that 
   
   <p align="center"><img src="Design/Images/Arm.png" width="150"/></p>
   
-  * Anthropomorphic arm claw: Articulated clamp located at the end of the arm, with which the Claw Rover 3K will catch the garbage.
+  * Anthropomorphic arm claw: Articulated clamp located at the end of the arm, with which the Claw Rover 3K will pick up the pieces of trash.
 
   <p align="center"><img src="Design/Images/Claw.png" width="200"/></p>
 
