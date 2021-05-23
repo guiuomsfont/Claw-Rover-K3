@@ -130,7 +130,7 @@ Before that though, we decided to implement two driving modes, the Adaptive Driv
 2. **Real Driving Mode**: On the other hand, we implemented the Real Driving Mode, which computes its speed based on the speed limiter traffic signs it detects. What this means is that this mode is always following the speed that the authorities have declared as fit for that section of the road. In the simulator, this driving mode acts according to the traffic signs we placed around the track, which means that it stops when it reads a STOP sign, and it adopts the speeds that the traffic signs indicate at all times. 
           
 ## **Handling Module**
-When the Handling mMde is activated, the robot is already standing next to the piece of trash it has to collect. Therefore, the servos at the wheels are turned off during this mode.
+When the Handling mode is activated, the robot is already standing next to the piece of trash it has to collect. Therefore, the servos at the wheels are turned off during this mode.
 
 Firstly, the arm of the robot moves to a position which allows the camera to see the object from above. After that, the camera detects the coordinates of the piece of trash. 
 
