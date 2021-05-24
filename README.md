@@ -4,6 +4,8 @@ Project of a programmed and simulated robot that drives autonomously and collect
 
 # Table of Contents
    * [What is this?](#What-is-this)
+   * [Requirements]
+   * [How to use]
    * [Description](#Description)<!-- [Amazing contributions](#Amazing-contributions)-->
    * [Video](#video)
    * [Hardware Scheme](#Hardware-Scheme)   
@@ -21,6 +23,23 @@ The result of this work is in this repository, in the form of a self-driving rob
 
 The Claw Rover K3 (CRK3) project is based on two very clear motivations. First, we wanted to create a robot committed to the environment, capable of making the world a slightly cleaner planet. Secondly, we were very fascinated by autonomous driving systems, such as those of Tesla, and we wanted to take advantage of this project to study them in depth, to implement one satisfactorily and to be able to play and experiment with it.
 From the union of these two great motivations, and from the ideas and the effort of the four members of the group, Claw Rover K3 was born.
+
+# Requirements
+- Python 3.9.x
+- Numpy
+- Matplotlib
+- Pandas
+- TensorFlow
+- OpenCV
+- Coppelia and Sim
+
+# How to use
+1. Clone this repo.
+> git clone https://github.com/guiuomsfont/Claw-Rover-K3.git
+2. Install the required libraries.
+3. Open one of the simulations.
+4. Run setup.py.
+5. Enjoy it!
 
 # Description
 In this project you will find the code, simulations and 3D designs of the parts of a robot developed from scratch, Claw-Rover-K3, which is able to drive autonomously and collect garbage previously detected using computer vision techniques. This robot consists, schematically, of an anthropomorphic arm located on a platform with four wheels (front-wheel drive). It is implemented with Coppelia simulator and, in case you want to carry it out in real life, the instructions dedicated to the movement of the simulation robot should be substituted by communication instructions from a Raspberry Pi board to an Arduino board. This is a necessary step in order to correctly interact with the hardware components of the robot, such as the wheels, the arm or the sensors.
@@ -137,56 +156,6 @@ Then, through the use of inverse kinematics equations, the robot computes the an
 Finally, the object will be deposited in the trash container, which is used to store all the trash that Claw Rover K3 collects.
 
 After all that is done, the robot will once again go back to the Driving Mode, and the cycle will keep repeating itself while there is trash to be collected.
-
-<!--
-In order to develop the idea we had, we must divide the software architecture in different modules. First to make them work separately and then be able to put them all together as one whole project. The modules are:
-* Computer Vision module: card recognition
-* Brisca AI 1vs1
-* Inverse Kinematics
-* Voice Recognition
-* Controller: communication of all the above modules.
-
-Initially all of them should have worked together, but after the project's objectives changed we decided to do different simulations in order to reproduce the functionality we were aiming for. These are:
-* Computer Vision module: card recognition (as an independent simulation)
-* Inverse Kinematics Simulation: not only doing the math but also visualizing it.
-* Fully functional 3D game: This simulation involves 3D models, animation and game development to have a fully inmersive experience and getting the closest image to what the project was going to look like.
-
-![2](https://github.com/OriolMoreno/C.A.R.L.E.S/blob/master/imgs/DiagramaModuls.png)
-
-
-## Modules
-
-### Brisca AI
-Requirements for the algorithm: python 3
-
-The first module is the AI that drives the game flow, it's the one who decides which card to choose from those on _C.A.R.L.E.S._' hand, based on what a human player could see, and more. It is explained in more detail in the [report](https://github.com/OriolMoreno/C.A.R.L.E.S/blob/master/reports/RLP_SPRINT_5%20-%20Final%20Report.pdf)), both it's python version for the actual raspberry pi-driven robot and the rework we made for the Unity videogame.
-
-### Card Detection with computer vision
-We made a program based on computer vision able to detect the number and suit of a card with any rotation and different backgrounds and illuminations. Here we show a part of the process: 
-
-Requirements: Python 3, and its libraries numpy, cv2, imutils, math and scipy.
-
-![2](https://github.com/OriolMoreno/C.A.R.L.E.S/blob/master/gif/modulVisio.gif)
-
-
-### Inverse kinematics algorithm + visualizer
-
-This algorithm built from scratch is based on the geometric inverse kinematics method for calculating arm degrees from coordinates, and the smooth movement between two points is calculated using a continuous rectiliniar trajectory.
-
-The visualizer takes an imput of an x,y,z position inside the workspace and shows an animation of _C.A.R.L.E.S._' arm doing the designated trajectory. As an example, this is the animation it'd play as a celebration when winning the game:
-
-![2](https://github.com/OriolMoreno/C.A.R.L.E.S/blob/master/gif/ik.gif)
-
-Requirements for the algorithm: Python 3 and the numpy and maths libraries. For visualization, matplotlib and scipy are also needed.
-
-
-### Voice recognition
-
-This module is based on google's speech recognition API, and it's used to analize the human opponent's orders, and guess which of the possible actions the user is requesting. This is sent to the main controller, which will send the information to the AI module if necessary.
-
-Requirements: Python 3 and its libraries google-cloud-speech, google-auth-oauthlib, sounddevice and soundfile.
--->
-
 
 # Authors
 
