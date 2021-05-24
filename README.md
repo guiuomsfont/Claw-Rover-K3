@@ -1,5 +1,5 @@
 # Claw-Rover-K3
-Project of a programmed and simulated robot that drives autonomously and collects garbage.
+Self-driving robot that collects trash along the road.
 <p align="center"><img src="/Design/Images/Robot.png" width="300"/></p>
 
 # Table of Contents
@@ -31,7 +31,7 @@ From the union of these two great motivations, and from the ideas and the effort
 - Pandas
 - TensorFlow
 - OpenCV
-- Coppelia and Sim
+- Coppelia and Simulator
 
 # How to use
 1. Clone this repo.
