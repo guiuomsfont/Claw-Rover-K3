@@ -1,5 +1,5 @@
 # Claw-Rover-K3
-Self-driving robot that collects trash along the road.
+Project of a self-driving robot that collects trash along the road.
 <p align="center"><img src="/Design/Images/Robot.png" width="300"/></p>
 
 # Table of Contents
