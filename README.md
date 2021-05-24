@@ -99,7 +99,7 @@ The 3D parts that make up the structure of the robot have been designed so that 
 
 # Software Architecture
 
- <p align="center"><img src="Design/Images/SAscheme.JPG" width="500"/></p>
+ <p align="center"><img src="Design/Images/SAscheme.JPG" width="800"/></p>
  
 Our software modules have all been programmed using the Python coding language. Conveniently, Python can easily be run on a Raspberry Pi 3, which is the board we are using in our robot. For testing purposes, we are using Coppelia Simulator, which can be interacted with through the Simulator library for Python. As we've already explained above, in order to run the robot in real life, the simulator methods should be substituted by the corresponding Serial calls to the Arduino board, which would then send the corresponding signals to the servos, as well as retrieve the frame signals from the camera sensor. 
 
