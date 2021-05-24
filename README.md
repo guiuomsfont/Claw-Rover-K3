@@ -4,8 +4,8 @@ Project of a programmed and simulated robot that drives autonomously and collect
 
 # Table of Contents
    * [What is this?](#What-is-this)
-   * [Requirements]
-   * [How to use]
+   * [Requirements](#Requirements)
+   * [How to use](#How-to-use)
    * [Description](#Description)<!-- [Amazing contributions](#Amazing-contributions)-->
    * [Video](#video)
    * [Hardware Scheme](#Hardware-Scheme)   
