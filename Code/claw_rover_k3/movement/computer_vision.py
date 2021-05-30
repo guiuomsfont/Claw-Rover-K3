@@ -21,30 +21,29 @@ def im2double(im):
 
 def pipeline(img, s_thresh=(125, 255), sx_thresh=(50, 255)):
     img = np.copy(img)
-    # Convert to HLS color space and separate the V channel
+    # Convert to HLS color space
     hls = cv2.cvtColor(img, cv2.COLOR_RGB2HLS)
     l_channel = hls[:, :, 1]
     s_channel = hls[:, :, 2]
-    h_channel = hls[:, :, 0]
-    # Sobel 
+    
+    # Saturation threshold
+    s_binary = np.zeros_like(s_channel)
+    s_binary[(s_channel >= s_thresh[0]) & (s_channel <= s_thresh[1])] = 1
+    
+    # Sobel
     sobelx = cv2.Sobel(l_channel, cv2.CV_64F, 1, 1)  # Horizontal derivative
-    abs_sobelx = np.absolute(sobelx)  
+    abs_sobelx = np.absolute(sobelx)
     scaled_sobel = np.uint8(255 * abs_sobelx / np.max(abs_sobelx))
 
     # Horizontal gradient threshold
     sxbinary = np.zeros_like(scaled_sobel)
     sxbinary[(scaled_sobel >= sx_thresh[0]) & (scaled_sobel <= sx_thresh[1])] = 1
 
-    # Saturation channel threshold
-    s_binary = np.zeros_like(s_channel)
-    s_binary[(s_channel >= s_thresh[0]) & (s_channel <= s_thresh[1])] = 1
-
     color_binary = np.dstack((np.zeros_like(sxbinary), sxbinary, s_binary)) * 255
 
     combined_binary = np.zeros_like(sxbinary)
     combined_binary[(s_binary == 1) | (sxbinary == 1)] = 1
     return combined_binary
-
 
 def perspective_warp(original, img, dst_size):
     height,width = img.shape
@@ -153,7 +152,7 @@ def sliding_window(img, nwindows=9, margin=150, minpix=1, draw_windows=True):
     rightx = nonzerox[right_lane_inds]
     righty = nonzeroy[right_lane_inds]
 
-    # Fit a second order polynomial to each
+    # Fit a polynomial function to each line
     if len(lefty) == 0 or len(leftx) == 0 or len(righty) == 0 or len(rightx) == 0:
         success = False
         return -1, (-1, -1), (-1, -1), -1, success
@@ -164,7 +163,6 @@ def sliding_window(img, nwindows=9, margin=150, minpix=1, draw_windows=True):
     left_a.append(left_fit[0])
     left_b.append(left_fit[1])
     left_c.append(left_fit[2])
-
     right_a.append(right_fit[0])
     right_b.append(right_fit[1])
     right_c.append(right_fit[2])
@@ -172,7 +170,6 @@ def sliding_window(img, nwindows=9, margin=150, minpix=1, draw_windows=True):
     left_fit_[0] = np.mean(left_a[-10:])
     left_fit_[1] = np.mean(left_b[-10:])
     left_fit_[2] = np.mean(left_c[-10:])
-
     right_fit_[0] = np.mean(right_a[-10:])
     right_fit_[1] = np.mean(right_b[-10:])
     right_fit_[2] = np.mean(right_c[-10:])
@@ -194,31 +191,6 @@ def sliding_window(img, nwindows=9, margin=150, minpix=1, draw_windows=True):
 
     return out_img, (left_fitx, right_fitx), (left_fit_, right_fit_), ploty, success
 
-
-def get_curve(img, leftx, rightx):
-    ploty = np.linspace(0, img.shape[0] - 1, img.shape[0])
-    y_eval = np.max(ploty)
-    ym_per_pix = 30.5 / 720  # meters per pixel in y dimension
-    xm_per_pix = 3.7 / 720  # meters per pixel in x dimension
-
-    # Fit new polynomials to x,y in world space
-    left_fit_cr = np.polyfit(ploty * ym_per_pix, leftx * xm_per_pix, 2)
-    right_fit_cr = np.polyfit(ploty * ym_per_pix, rightx * xm_per_pix, 2)
-    # Calculate the new radii of curvature
-    left_curverad = ((1 + (2 * left_fit_cr[0] * y_eval * ym_per_pix + left_fit_cr[1]) ** 2) ** 1.5) / np.absolute(
-        2 * left_fit_cr[0])
-    right_curverad = ((1 + (2 * right_fit_cr[0] * y_eval * ym_per_pix + right_fit_cr[1]) ** 2) ** 1.5) / np.absolute(
-        2 * right_fit_cr[0])
-
-    car_pos = img.shape[1] / 2
-    l_fit_x_int = left_fit_cr[0] * img.shape[0] ** 2 + left_fit_cr[1] * img.shape[0] + left_fit_cr[2]
-    r_fit_x_int = right_fit_cr[0] * img.shape[0] ** 2 + right_fit_cr[1] * img.shape[0] + right_fit_cr[2]
-    lane_center_position = (r_fit_x_int + l_fit_x_int) / 2
-    center = (car_pos - lane_center_position) * xm_per_pix / 10
-    # Now our radius of curvature is in meters
-    return (left_curverad, right_curverad, center)
-
-
 def draw_lanes(img, left_fit, right_fit):
     ploty = np.linspace(0, img.shape[0] - 1, img.shape[0])
     color_img = np.zeros_like(img)
@@ -232,8 +204,6 @@ def draw_lanes(img, left_fit, right_fit):
     inv_perspective = inv_perspective_warp(color_img, color_size)
     inv_perspective = cv2.addWeighted(img, 1, inv_perspective, 0.7, 0)
     return inv_perspective
-
-
 
 def get_dataset(crk3, clientID, counter_i):
     retCode, resolution, frame = sim.simxGetVisionSensorImage(clientID, crk3.picam2, 0, sim.simx_opmode_oneshot_wait)
