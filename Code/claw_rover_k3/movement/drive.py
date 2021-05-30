@@ -70,7 +70,7 @@ def GoToTrashAdaptative(clientID, crk3, p_gain, d_gain, i_gain, integral, prev_o
         # End of frame processing
         
     crono = time.time()
-    while time.time() - crono < 10:
+    while time.time() - crono < 11:
         offset, detected_trash = cv.AnalyzeFrameAdaptative(crk3, clientID, prev_offset)
         off_delta = prev_offset - offset
         
@@ -129,7 +129,7 @@ def GoToTrashReal(clientID, crk3, p_gain, d_gain, i_gain, integral, prev_offset,
         # End of frame processing
         
     crono = time.time()
-    while time.time() - crono < 10:
+    while time.time() - crono < 11:
         offset, detected_trash, speed = cv.AnalyzeFrameReal(crk3, clientID, prev_offset)
         off_delta = prev_offset - offset
         

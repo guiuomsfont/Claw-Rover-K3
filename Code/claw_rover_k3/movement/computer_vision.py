@@ -9,6 +9,7 @@ import cv2
 import tensorflow as tf                          
 from PIL import Image                                                                  
 from sklearn.model_selection import train_test_split
+from keras.utils import to_categorical          
 from keras.models import Sequential, load_model
 from keras.layers import Conv2D, MaxPool2D, Dense, Flatten, Dropout                                    
 import warnings
@@ -21,23 +22,23 @@ def im2double(im):
 
 def pipeline(img, s_thresh=(125, 255), sx_thresh=(50, 255)):
     img = np.copy(img)
-    # Convert to HLS color space
+    # Convert to HLS color space and separate the V channel
     hls = cv2.cvtColor(img, cv2.COLOR_RGB2HLS)
     l_channel = hls[:, :, 1]
     s_channel = hls[:, :, 2]
-    
-    # Saturation threshold
-    s_binary = np.zeros_like(s_channel)
-    s_binary[(s_channel >= s_thresh[0]) & (s_channel <= s_thresh[1])] = 1
-    
-    # Sobel
-    sobelx = cv2.Sobel(l_channel, cv2.CV_64F, 1, 1)  # Horizontal derivative
-    abs_sobelx = np.absolute(sobelx)
+    h_channel = hls[:, :, 0]
+    # Sobel x
+    sobelx = cv2.Sobel(l_channel, cv2.CV_64F, 1, 1)  # Take the derivative in x
+    abs_sobelx = np.absolute(sobelx)  # Absolute x derivative to accentuate lines away from horizontal
     scaled_sobel = np.uint8(255 * abs_sobelx / np.max(abs_sobelx))
 
-    # Horizontal gradient threshold
+    # Threshold x gradient
     sxbinary = np.zeros_like(scaled_sobel)
     sxbinary[(scaled_sobel >= sx_thresh[0]) & (scaled_sobel <= sx_thresh[1])] = 1
+
+    # Threshold color channel
+    s_binary = np.zeros_like(s_channel)
+    s_binary[(s_channel >= s_thresh[0]) & (s_channel <= s_thresh[1])] = 1
 
     color_binary = np.dstack((np.zeros_like(sxbinary), sxbinary, s_binary)) * 255
 
@@ -45,9 +46,23 @@ def pipeline(img, s_thresh=(125, 255), sx_thresh=(50, 255)):
     combined_binary[(s_binary == 1) | (sxbinary == 1)] = 1
     return combined_binary
 
+
 def perspective_warp(original, img, dst_size):
     height,width = img.shape
-
+    """src=np.float32([(0.43,0.65),(0.58,0.65),(0.1,1),(1,1)])
+    dst=np.float32([(0,0), (1, 0), (0,1), (1,1)])
+    
+    img_size = np.float32([(img.shape[1],img.shape[0])])
+    src = src* img_size
+    dst = dst * np.float32(dst_size)"""
+    """src = np.float32([(150, 335), (70, 400), (425, 400), (362, 335)])
+    dst = np.float32([(110,0), (110, height), (400,height), (400,0)])"""
+    """src = np.float32([(150, 335), (0, 400), (512, 400), (362, 335)])
+    dst = np.float32([(110,0), (110, height), (400,height), (400,0)])"""
+    """src = np.float32([(200, 150), (120, 200), (384, 200), (300, 150)])
+    dst = np.float32([(228,0), (228, height), (284,height), (284,0)])"""
+    """src = np.float32([(165, 175), (125, 200), (387, 200), (340, 175)])
+    dst = np.float32([(125,0), (125, height), (387,height), (387,0)])"""
     src = np.float32([(120, 200), (38, 255), (460, 255), (380, 200)])
     dst = np.float32([(128,0), (128, height), (384,height), (384,0)])
     """src1 = (120, 200)
@@ -56,6 +71,8 @@ def perspective_warp(original, img, dst_size):
     src4 = (380, 200)
     src_points = np.array([[src1, src2, src3, src4]]).astype('float32')"""
     
+    """src = np.float32([(220, 140), (120, 200), (392, 200), (284, 140)])
+    dst = np.float32([(120,0), (120, height), (392,height), (392,0)])"""
     M = cv2.getPerspectiveTransform(src, dst)
     Minv = cv2.getPerspectiveTransform(dst, src)
     warped = cv2.warpPerspective(img, M, dst_size)
@@ -70,10 +87,19 @@ def perspective_warp(original, img, dst_size):
 
 def inv_perspective_warp(img, dst_size):
     height,width,_ = img.shape
-
+    """dst=np.float32([(0.43,0.65),(0.58,0.65),(0.1,1),(1,1)])
+    src=np.float32([(0,0), (width, 0), (0,height), (width,height)])
+    img_size = np.float32([(img.shape[1],img.shape[0])])
+    src = src* img_size
+    dst = dst * np.float32(dst_size)"""
+    """dst = np.float32([(200, 150), (120, 200), (384, 200), (300, 150)])
+    src = np.float32([(228,0), (228, height), (284,height), (284,0)])"""
     dst = np.float32([(120, 200), (38, 255), (460, 255), (380, 200)])
     src = np.float32([(128,0), (128, height), (384,height), (384,0)])
-
+    """dst = np.float32([(150, 335), (0, 400), (512, 400), (362, 335)])
+    src = np.float32([(110,0), (110, height), (400,height), (400,0)])"""
+    """dst = np.float32([(220, 140), (120, 200), (392, 200), (284, 140)])
+    src = np.float32([(150,0), (150, height), (350,height), (350,0)])"""
     M = cv2.getPerspectiveTransform(src, dst)
     warped = cv2.warpPerspective(img, M, dst_size)
     return warped
@@ -142,6 +168,15 @@ def sliding_window(img, nwindows=9, margin=150, minpix=1, draw_windows=True):
         if len(good_right_inds) > minpix:
             rightx_current = np.int(np.mean(nonzerox[good_right_inds]))
 
+    #        if len(good_right_inds) > minpix:
+    #            rightx_current = np.int(np.mean([leftx_current +900, np.mean(nonzerox[good_right_inds])]))
+    #        elif len(good_left_inds) > minpix:
+    #            rightx_current = np.int(np.mean([np.mean(nonzerox[good_left_inds]) +900, rightx_current]))
+    #        if len(good_left_inds) > minpix:
+    #            leftx_current = np.int(np.mean([rightx_current -900, np.mean(nonzerox[good_left_inds])]))
+    #        elif len(good_right_inds) > minpix:
+    #            leftx_current = np.int(np.mean([np.mean(nonzerox[good_right_inds]) -900, leftx_current]))
+
     # Concatenate the arrays of indices
     left_lane_inds = np.concatenate(left_lane_inds)
     right_lane_inds = np.concatenate(right_lane_inds)
@@ -152,7 +187,7 @@ def sliding_window(img, nwindows=9, margin=150, minpix=1, draw_windows=True):
     rightx = nonzerox[right_lane_inds]
     righty = nonzeroy[right_lane_inds]
 
-    # Fit a polynomial function to each line
+    # Fit a second order polynomial to each
     if len(lefty) == 0 or len(leftx) == 0 or len(righty) == 0 or len(rightx) == 0:
         success = False
         return -1, (-1, -1), (-1, -1), -1, success
@@ -163,6 +198,7 @@ def sliding_window(img, nwindows=9, margin=150, minpix=1, draw_windows=True):
     left_a.append(left_fit[0])
     left_b.append(left_fit[1])
     left_c.append(left_fit[2])
+
     right_a.append(right_fit[0])
     right_b.append(right_fit[1])
     right_c.append(right_fit[2])
@@ -170,6 +206,7 @@ def sliding_window(img, nwindows=9, margin=150, minpix=1, draw_windows=True):
     left_fit_[0] = np.mean(left_a[-10:])
     left_fit_[1] = np.mean(left_b[-10:])
     left_fit_[2] = np.mean(left_c[-10:])
+
     right_fit_[0] = np.mean(right_a[-10:])
     right_fit_[1] = np.mean(right_b[-10:])
     right_fit_[2] = np.mean(right_c[-10:])
@@ -191,6 +228,31 @@ def sliding_window(img, nwindows=9, margin=150, minpix=1, draw_windows=True):
 
     return out_img, (left_fitx, right_fitx), (left_fit_, right_fit_), ploty, success
 
+
+def get_curve(img, leftx, rightx):
+    ploty = np.linspace(0, img.shape[0] - 1, img.shape[0])
+    y_eval = np.max(ploty)
+    ym_per_pix = 30.5 / 720  # meters per pixel in y dimension
+    xm_per_pix = 3.7 / 720  # meters per pixel in x dimension
+
+    # Fit new polynomials to x,y in world space
+    left_fit_cr = np.polyfit(ploty * ym_per_pix, leftx * xm_per_pix, 2)
+    right_fit_cr = np.polyfit(ploty * ym_per_pix, rightx * xm_per_pix, 2)
+    # Calculate the new radii of curvature
+    left_curverad = ((1 + (2 * left_fit_cr[0] * y_eval * ym_per_pix + left_fit_cr[1]) ** 2) ** 1.5) / np.absolute(
+        2 * left_fit_cr[0])
+    right_curverad = ((1 + (2 * right_fit_cr[0] * y_eval * ym_per_pix + right_fit_cr[1]) ** 2) ** 1.5) / np.absolute(
+        2 * right_fit_cr[0])
+
+    car_pos = img.shape[1] / 2
+    l_fit_x_int = left_fit_cr[0] * img.shape[0] ** 2 + left_fit_cr[1] * img.shape[0] + left_fit_cr[2]
+    r_fit_x_int = right_fit_cr[0] * img.shape[0] ** 2 + right_fit_cr[1] * img.shape[0] + right_fit_cr[2]
+    lane_center_position = (r_fit_x_int + l_fit_x_int) / 2
+    center = (car_pos - lane_center_position) * xm_per_pix / 10
+    # Now our radius of curvature is in meters
+    return (left_curverad, right_curverad, center)
+
+
 def draw_lanes(img, left_fit, right_fit):
     ploty = np.linspace(0, img.shape[0] - 1, img.shape[0])
     color_img = np.zeros_like(img)
@@ -204,6 +266,8 @@ def draw_lanes(img, left_fit, right_fit):
     inv_perspective = inv_perspective_warp(color_img, color_size)
     inv_perspective = cv2.addWeighted(img, 1, inv_perspective, 0.7, 0)
     return inv_perspective
+
+
 
 def get_dataset(crk3, clientID, counter_i):
     retCode, resolution, frame = sim.simxGetVisionSensorImage(clientID, crk3.picam2, 0, sim.simx_opmode_oneshot_wait)
@@ -464,6 +528,7 @@ def AnalyzeFrameAdaptative(crk3, clientID, prev_offset):
     dst = cv2.erode(dst,kernel,iterations = 1)
 
     dst_size = (dst.shape[1], dst.shape[0])
+    #dst = change_perspective(dst, dst_size)
     dst, M, Minv = perspective_warp(frame, dst, dst_size)
 
     out_img, curves, lanes, ploty, success = sliding_window(dst)
@@ -474,6 +539,8 @@ def AnalyzeFrameAdaptative(crk3, clientID, prev_offset):
     midpoint = (right+left)/2
     car_position = width/2
     offset = car_position - midpoint
+
+    #curverad = get_curve(frame, curves[0], curves[1])
 
     # switch trash =
     # -1: No detected trash
@@ -519,6 +586,8 @@ def AnalyzeFrameReal(crk3, clientID, prev_offset):
     midpoint = (right+left)/2
     car_position = width/2
     offset = car_position - midpoint
+
+    #curverad = get_curve(frame, curves[0], curves[1])
 
     # Here we will detect traffic signs and trash
     
