@@ -9,7 +9,6 @@ import cv2
 import tensorflow as tf                          
 from PIL import Image                                                                  
 from sklearn.model_selection import train_test_split
-from keras.utils import to_categorical          
 from keras.models import Sequential, load_model
 from keras.layers import Conv2D, MaxPool2D, Dense, Flatten, Dropout                                    
 import warnings
@@ -27,16 +26,16 @@ def pipeline(img, s_thresh=(125, 255), sx_thresh=(50, 255)):
     l_channel = hls[:, :, 1]
     s_channel = hls[:, :, 2]
     h_channel = hls[:, :, 0]
-    # Sobel x
-    sobelx = cv2.Sobel(l_channel, cv2.CV_64F, 1, 1)  # Take the derivative in x
-    abs_sobelx = np.absolute(sobelx)  # Absolute x derivative to accentuate lines away from horizontal
+    # Sobel 
+    sobelx = cv2.Sobel(l_channel, cv2.CV_64F, 1, 1)  # Horizontal derivative
+    abs_sobelx = np.absolute(sobelx)  
     scaled_sobel = np.uint8(255 * abs_sobelx / np.max(abs_sobelx))
 
-    # Threshold x gradient
+    # Horizontal gradient threshold
     sxbinary = np.zeros_like(scaled_sobel)
     sxbinary[(scaled_sobel >= sx_thresh[0]) & (scaled_sobel <= sx_thresh[1])] = 1
 
-    # Threshold color channel
+    # Saturation channel threshold
     s_binary = np.zeros_like(s_channel)
     s_binary[(s_channel >= s_thresh[0]) & (s_channel <= s_thresh[1])] = 1
 
@@ -49,20 +48,7 @@ def pipeline(img, s_thresh=(125, 255), sx_thresh=(50, 255)):
 
 def perspective_warp(original, img, dst_size):
     height,width = img.shape
-    """src=np.float32([(0.43,0.65),(0.58,0.65),(0.1,1),(1,1)])
-    dst=np.float32([(0,0), (1, 0), (0,1), (1,1)])
-    
-    img_size = np.float32([(img.shape[1],img.shape[0])])
-    src = src* img_size
-    dst = dst * np.float32(dst_size)"""
-    """src = np.float32([(150, 335), (70, 400), (425, 400), (362, 335)])
-    dst = np.float32([(110,0), (110, height), (400,height), (400,0)])"""
-    """src = np.float32([(150, 335), (0, 400), (512, 400), (362, 335)])
-    dst = np.float32([(110,0), (110, height), (400,height), (400,0)])"""
-    """src = np.float32([(200, 150), (120, 200), (384, 200), (300, 150)])
-    dst = np.float32([(228,0), (228, height), (284,height), (284,0)])"""
-    """src = np.float32([(165, 175), (125, 200), (387, 200), (340, 175)])
-    dst = np.float32([(125,0), (125, height), (387,height), (387,0)])"""
+
     src = np.float32([(120, 200), (38, 255), (460, 255), (380, 200)])
     dst = np.float32([(128,0), (128, height), (384,height), (384,0)])
     """src1 = (120, 200)
@@ -71,8 +57,6 @@ def perspective_warp(original, img, dst_size):
     src4 = (380, 200)
     src_points = np.array([[src1, src2, src3, src4]]).astype('float32')"""
     
-    """src = np.float32([(220, 140), (120, 200), (392, 200), (284, 140)])
-    dst = np.float32([(120,0), (120, height), (392,height), (392,0)])"""
     M = cv2.getPerspectiveTransform(src, dst)
     Minv = cv2.getPerspectiveTransform(dst, src)
     warped = cv2.warpPerspective(img, M, dst_size)
@@ -87,19 +71,10 @@ def perspective_warp(original, img, dst_size):
 
 def inv_perspective_warp(img, dst_size):
     height,width,_ = img.shape
-    """dst=np.float32([(0.43,0.65),(0.58,0.65),(0.1,1),(1,1)])
-    src=np.float32([(0,0), (width, 0), (0,height), (width,height)])
-    img_size = np.float32([(img.shape[1],img.shape[0])])
-    src = src* img_size
-    dst = dst * np.float32(dst_size)"""
-    """dst = np.float32([(200, 150), (120, 200), (384, 200), (300, 150)])
-    src = np.float32([(228,0), (228, height), (284,height), (284,0)])"""
+
     dst = np.float32([(120, 200), (38, 255), (460, 255), (380, 200)])
     src = np.float32([(128,0), (128, height), (384,height), (384,0)])
-    """dst = np.float32([(150, 335), (0, 400), (512, 400), (362, 335)])
-    src = np.float32([(110,0), (110, height), (400,height), (400,0)])"""
-    """dst = np.float32([(220, 140), (120, 200), (392, 200), (284, 140)])
-    src = np.float32([(150,0), (150, height), (350,height), (350,0)])"""
+
     M = cv2.getPerspectiveTransform(src, dst)
     warped = cv2.warpPerspective(img, M, dst_size)
     return warped
@@ -167,15 +142,6 @@ def sliding_window(img, nwindows=9, margin=150, minpix=1, draw_windows=True):
             leftx_current = np.int(np.mean(nonzerox[good_left_inds]))
         if len(good_right_inds) > minpix:
             rightx_current = np.int(np.mean(nonzerox[good_right_inds]))
-
-    #        if len(good_right_inds) > minpix:
-    #            rightx_current = np.int(np.mean([leftx_current +900, np.mean(nonzerox[good_right_inds])]))
-    #        elif len(good_left_inds) > minpix:
-    #            rightx_current = np.int(np.mean([np.mean(nonzerox[good_left_inds]) +900, rightx_current]))
-    #        if len(good_left_inds) > minpix:
-    #            leftx_current = np.int(np.mean([rightx_current -900, np.mean(nonzerox[good_left_inds])]))
-    #        elif len(good_right_inds) > minpix:
-    #            leftx_current = np.int(np.mean([np.mean(nonzerox[good_right_inds]) -900, leftx_current]))
 
     # Concatenate the arrays of indices
     left_lane_inds = np.concatenate(left_lane_inds)
@@ -528,7 +494,6 @@ def AnalyzeFrameAdaptative(crk3, clientID, prev_offset):
     dst = cv2.erode(dst,kernel,iterations = 1)
 
     dst_size = (dst.shape[1], dst.shape[0])
-    #dst = change_perspective(dst, dst_size)
     dst, M, Minv = perspective_warp(frame, dst, dst_size)
 
     out_img, curves, lanes, ploty, success = sliding_window(dst)
@@ -539,8 +504,6 @@ def AnalyzeFrameAdaptative(crk3, clientID, prev_offset):
     midpoint = (right+left)/2
     car_position = width/2
     offset = car_position - midpoint
-
-    #curverad = get_curve(frame, curves[0], curves[1])
 
     # switch trash =
     # -1: No detected trash
@@ -586,8 +549,6 @@ def AnalyzeFrameReal(crk3, clientID, prev_offset):
     midpoint = (right+left)/2
     car_position = width/2
     offset = car_position - midpoint
-
-    #curverad = get_curve(frame, curves[0], curves[1])
 
     # Here we will detect traffic signs and trash
     
